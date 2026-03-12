@@ -1,0 +1,30 @@
+.health-status {
+  background: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+}
+
+.health-status.healthy {
+  border-left: 4px solid #4caf50;
+  color: #2e7d32;
+}
+
+.health-status.unhealthy {
+  border-left: 4px solid #f44336;
+  color: #c62828;
+}
+
+.health-status.unknown {
+  border-left: 4px solid #ff9800;
+  color: #e65100;
+}
+
+.status-indicator {
+  font-size: 1.2rem;
+}
