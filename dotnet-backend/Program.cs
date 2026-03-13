@@ -74,14 +74,14 @@ builder.Services.AddAutoMapper(cfg =>
 {
     cfg.AddProfile<MappingProfile>();
 }, typeof(MappingProfile).Assembly);
-
+builder.Services.AddSingleton<TaskApiMetrics>();
 
 builder.Services.AddDbContext<DotNetTestDbContext>(options =>
        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
-//builder.Services.AddSwaggerGen();
+
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -139,6 +139,7 @@ app.MapGet("/api/stats", (DataStore store) =>
 });
 
 app.UseMiddleware<RequestTimingMiddleware>();
+app.UseMiddleware<MetricsMiddleware>();
 
 app.MapControllers();
 
