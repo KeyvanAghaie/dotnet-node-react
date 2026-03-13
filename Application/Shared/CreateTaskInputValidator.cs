@@ -19,7 +19,7 @@ namespace Application.Shared
 
             RuleFor(x => x.Status)
                 .NotEmpty().WithMessage("Status is required")
-                .Must(status => new[] { "Pending", "InProgress", "Completed" }.Contains(status))
+                .Must(status => new[] { "pending", "in-progress", "completed" }.Contains(status))
                 .WithMessage("Status must be either Pending, InProgress or Completed");
 
             RuleFor(x => x.UserId)

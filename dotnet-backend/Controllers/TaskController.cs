@@ -2,6 +2,7 @@
 using Application.Dto.Users;
 using AutoMapper;
 using Core.Entities;
+using DotnetBackend.Models;
 using FluentValidation;
 using Infra.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -51,9 +52,12 @@ public class TaskController : ControllerBase
         {
             tasks = tasks.Where(t => t.Status.Equals(status, StringComparison.OrdinalIgnoreCase));
         }
-
-        var taskDtos = _mapper.Map<IEnumerable<TaskItemDto>>(tasks);
-        return Ok(taskDtos);
+        var response = new TasksResponse
+        {
+            Tasks = tasks.ToList(),
+            Count = tasks.Count()
+        };
+        return Ok(response);
     }
 
     /// <summary>
