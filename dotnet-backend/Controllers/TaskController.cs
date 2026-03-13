@@ -40,9 +40,18 @@ public class TaskController : ControllerBase
     [HttpGet(Name = "GetTasks")]
     [ProducesResponseType(typeof(IEnumerable<TaskItemDto>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<TaskItemDto>>> GetTasks(
-        CancellationToken cancellationToken = default)
+      [FromQuery] string? status = null,  // Add this parameter
+      CancellationToken cancellationToken = default)
     {
+        // Get all tasks
         var tasks = await _taskRepository.GetAllAsync(cancellationToken);
+
+        // Apply status filter if provided
+        if (!string.IsNullOrWhiteSpace(status))
+        {
+            tasks = tasks.Where(t => t.Status.Equals(status, StringComparison.OrdinalIgnoreCase));
+        }
+
         var taskDtos = _mapper.Map<IEnumerable<TaskItemDto>>(tasks);
         return Ok(taskDtos);
     }

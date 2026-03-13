@@ -24,8 +24,8 @@ namespace Application.Shared
 
             RuleFor(x => x.Role)
                 .NotEmpty().WithMessage("Role is required")
-                .Must(role => new[] { "Admin", "User", "Manager" }.Contains(role))
-                .WithMessage("Role must be either Admin, User, or Manager");
+                .Must(role => new[] { "admin", "developer" , "designer", "manager" }.Contains(role))
+                .WithMessage("Role must be either Admin, Developer, Designer or Manager");
         }
     }
 }
