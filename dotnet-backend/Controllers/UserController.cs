@@ -3,6 +3,7 @@ using AutoMapper;
 using Azure;
 using Core.Entities;
 using DotnetBackend.Data;
+using DotnetBackend.Models;
 using FluentValidation;
 using Infra.Repositories;
 using Microsoft.AspNetCore.Identity;
@@ -56,8 +57,12 @@ public class UserController : ControllerBase
     public async Task<IActionResult> Users(CancellationToken cancellationToken = default)
     {
         var users = await _userRepository.GetAllAsync(cancellationToken);
-        var userDtos = _mapper.Map<IEnumerable<UserDto>>(users);
-        return Ok(userDtos);
+        var response = new UsersResponse
+        {
+            Users = users.ToList(),
+            Count = users.Count()
+        };
+        return Ok(response);
     }
 
 
