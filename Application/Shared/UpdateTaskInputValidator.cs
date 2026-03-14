@@ -10,7 +10,7 @@ namespace Application.Shared
 {
     public class UpdateTaskInputValidator : AbstractValidator<UpdateTaskInput>
     {
-        private readonly string[] _validStatuses = { "Pending", "InProgress", "Completed"};
+        private readonly string[] _validStatuses = { "pending", "in-progress", "completed"};
 
         public UpdateTaskInputValidator()
         {
@@ -24,8 +24,6 @@ namespace Application.Shared
             // Status validation (optional but must be valid if provided)
             RuleFor(x => x.Status)
                 .Must(BeAValidStatus).WithMessage($"Status must be one of: {string.Join(", ", _validStatuses)}")
-                .Must(status => string.IsNullOrEmpty(status) || char.IsUpper(status[0]))
-                    .WithMessage("Status should start with uppercase letter (e.g., 'Pending', not 'pending')")
                 .When(x => !string.IsNullOrEmpty(x.Status));
 
             // UserId validation (optional but must be valid if provided)
