@@ -36,6 +36,7 @@ Node.js Backend (port 3000)
 
 ```bash
 cd dotnet-backend
+update database
 dotnet run
 ```
 
