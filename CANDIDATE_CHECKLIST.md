@@ -108,7 +108,7 @@ Use this checklist to track your progress through the **.NET developer** test.
 
 Use this space to track any issues, questions, or design decisions:
 ```
-I added Database, so please add the DB by migration (name : DotnetTestDB) 
+I added Database, so please add the DB by migration (name: DotNetTestDB) 
 
 # Create initial migration
 dotnet ef migrations add InitialCreate
