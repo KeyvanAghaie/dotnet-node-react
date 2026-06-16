@@ -1,7 +1,3 @@
-# .NET Developer Test Project
-
-This project is designed to test **.NET (C#) developers'** skills in building an ASP.NET Core backend that powers a React + Node.js application.
-
 ## 📚 Documentation
 
 - **[Getting Started](./GETTING_STARTED.md)** – .NET test setup guide
