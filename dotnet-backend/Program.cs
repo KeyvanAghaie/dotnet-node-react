@@ -18,6 +18,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<JwtSettings>(
     builder.Configuration.GetSection("JwtSettings"));
 
+
+builder.Services.AddMemoryCache(options =>
+{
+    options.ExpirationScanFrequency = TimeSpan.FromMinutes(5);
+});
+
 var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>()!;
 
 // ⭐ Add Authentication

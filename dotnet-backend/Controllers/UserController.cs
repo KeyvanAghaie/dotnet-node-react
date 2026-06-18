@@ -8,6 +8,7 @@ using FluentValidation;
 using Infra.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using webapi.Filters;
 
 [ApiController]
 [Route("api/users")]
@@ -35,6 +36,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("{id:int}", Name = "GetUserById")]
+    [Cache(durationInSeconds: 300, cacheKeyPrefix: "user")] // ⭐ 5 minutes cache
     [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<UserDto>> GetUserById(
@@ -54,6 +56,7 @@ public class UserController : ControllerBase
 
 
     [HttpGet(Name = "users")]
+    [Cache(durationInSeconds: 600, cacheKeyPrefix: "user")] // ⭐ 10 minutes cache
     public async Task<IActionResult> Users(CancellationToken cancellationToken = default)
     {
         var users = await _userRepository.GetAllAsync(cancellationToken);
